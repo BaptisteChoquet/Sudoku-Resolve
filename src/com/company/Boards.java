@@ -1,4 +1,4 @@
-package com.robin;
+package com.company;
 
 public class Boards {
     static int[][] boardEasy = {
