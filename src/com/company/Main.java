@@ -6,36 +6,44 @@ public class Main {
      * @param grille
      */
     public static void PrintGrille(int grille[][]){
-        int colonne=0;
-        int ligne=0;
-        while (ligne<9 && colonne<9){
-            if (ligne==8){
-                System.out.println(grille[ligne][colonne]);
-                ligne=0;
-                colonne=colonne+1;
+        int line=0;
+        int colonn=0;
+
+        while (colonn<9 && line<9){
+            if (colonn==8){
+                System.out.println(grille[line][colonn]);
+                colonn=0;
+                line=line+1;
             }else {
-                System.out.print(grille[ligne][colonne]);
+                System.out.print(grille[line][colonn]);
                 System.out.print(" ");
-                ligne++;
+                colonn++;
             }
         }
 
     }
-    public static boolean GoodLine(int grille[][],int colonne){
+    public static boolean GoodLine(int grille[][],int line){
 
-        int ligne=0;
+        int colonn=0;
         int [] valeur= new int[9];
-        while (ligne<9 ){
+        while (colonn<9 ){
 
-                for (int i=0; i<=valeur.length-1;i++){
-                    if (grille[ligne][colonne]==0 ||grille[ligne][colonne]==valeur[i]){
-                        return false;
+                for (int i=0; i<=8;i++) {
+                    if (grille[line][colonn] == 0) {
 
+                    } else {
+                        for (int n = 0; n <= 8; n++) {
+                            if (grille[line][colonn] == valeur[n]) {
+                                return false;
+                            }
+                        }
                     }
+
+                    valeur[colonn]= grille[line][colonn];
+                    colonn++;
+
                 }
-                valeur[ligne]= grille[ligne][colonne];
-                ligne++;
-            }
+        }
 
         return true;
     }
@@ -43,7 +51,7 @@ public class Main {
     public static void main(String[] args) {
 
 	PrintGrille(Boards.boardEasy);
-	boolean GoodLine=GoodLine(Boards.boardEasy,1);
+	boolean GoodLine=GoodLine(Boards.boardEasy,0);
 	System.out.print(GoodLine);
 
 
