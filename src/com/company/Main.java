@@ -22,29 +22,34 @@ public class Main {
         }
 
     }
+
+    /**
+     * Vérifie si une ligne suis la règle du Sudoku.
+     * @param grille
+     * @param line
+     * @return True si la ligne est correct sinon revoie False
+     */
+
     public static boolean GoodLine(int grille[][],int line){
 
         int colonn=0;
         int [] valeur= new int[9];
         while (colonn<9 ){
-
-                for (int i=0; i<=8;i++) {
-                    if (grille[line][colonn] == 0) {
-
-                    } else {
-                        for (int n = 0; n <= 8; n++) {
-                            if (grille[line][colonn] == valeur[n]) {
-                                return false;
-                            }
-                        }
-                    }
-
-                    valeur[colonn]= grille[line][colonn];
-                    colonn++;
+            for (int i=0; i<=8;i++) {
+                if (grille[line][colonn] == 0) {
 
                 }
+                else {
+                    for (int n = 0; n <= 8; n++) {
+                        if (grille[line][colonn] == valeur[n]) {
+                            return false;
+                        }
+                    }
+                }
+                valeur[colonn]= grille[line][colonn];
+                colonn++;
+            }
         }
-
         return true;
     }
 
