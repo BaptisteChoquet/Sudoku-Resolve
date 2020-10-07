@@ -8,13 +8,13 @@ public class Main {
     public static void PrintGrille(int grille[][]){
         int colonne=0;
         int ligne=0;
-        while (ligne<9 && colonn<9){
+        while (ligne<9 && colonne<9){
             if (ligne==8){
-                System.out.println(grille[ligne][colonn]);
+                System.out.println(grille[ligne][colonne]);
                 ligne=0;
-                colonn=colonn+1;
+                colonne=colonne+1;
             }else {
-                System.out.print(grille[ligne][colonn]);
+                System.out.print(grille[ligne][colonne]);
                 System.out.print(" ");
                 ligne++;
             }
