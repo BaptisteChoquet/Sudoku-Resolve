@@ -21,6 +21,19 @@ public class Main {
         }
 
     }
+    public static boolean GoodLine(int grille[][]){
+        int colonne=0;
+        int ligne=0;
+        while (ligne<9 && colonne<9){
+            if (ligne==8){
+                ligne=0;
+                colonne=colonne+1;
+            }else {
+                ligne++;
+            }
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
 
