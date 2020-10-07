@@ -53,11 +53,43 @@ public class Main {
         return true;
     }
 
+    /**
+     *
+     * Vérifie si une colonne suis la règle du Sudoku.
+     * @param grille
+     * @param colonn
+     * @return True si la colonne est correct sinon revoie False
+     */
+    public static boolean GoodColonn(int grille[][],int colonn){
+
+        int line=0;
+        int [] valeur= new int[9];
+        while (line<9 ){
+            for (int i=0; i<=8;i++) {
+                if (grille[line][colonn] == 0) {
+
+                }
+                else {
+                    for (int n = 0; n <= 8; n++) {
+                        if (grille[line][colonn] == valeur[n]) {
+                            return false;
+                        }
+                    }
+                }
+                valeur[line]= grille[line][colonn];
+                line++;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
 
 	PrintGrille(Boards.boardEasy);
 	boolean GoodLine=GoodLine(Boards.boardEasy,0);
-	System.out.print(GoodLine);
+	System.out.println(GoodLine);
+	boolean GoodColonn=GoodColonn(Boards.boardEasy,0);
+	System.out.println(GoodColonn);
 
 
 
