@@ -7,17 +7,17 @@ public class Main {
      */
     public static void PrintGrille(int grille[][]){
         int line=0;
-        int colonn=0;
+        int colonne=0;
 
-        while (colonn<9 && line<9){
-            if (colonn==8){
-                System.out.println(grille[line][colonn]);
-                colonn=0;
+        while (colonne<9 && line<9){
+            if (colonne==8){
+                System.out.println(grille[line][colonne]);
+                colonne=0;
                 line=line+1;
             }else {
-                System.out.print(grille[line][colonn]);
+                System.out.print(grille[line][colonne]);
                 System.out.print(" ");
-                colonn++;
+                colonne++;
             }
         }
 
@@ -62,22 +62,22 @@ public class Main {
      */
     public static boolean GoodColonne(int grille[][],int j){
 
-        int colonne=0;
+        int colonn=0;
         int [] valeurColonne= new int[9];
-        while (colonne < 9){
+        while (colonn < 9){
             for (int m=0 ; m<=8 ; m++) {
-                if (grille[colonne][j] == 0) {
+                if (grille[colonn][j] == 0) {
 
                 }
                 else {
                     for (int n = 0; n <= 8; n++) {
-                        if (grille[colonne][j] == valeurColonne[n]) {
+                        if (grille[colonn][j] == valeurColonne[n]) {
                             return false;
                         }
                     }
                 }
-                valeurColonne[colonne]= grille[colonne][j];
-                colonne++;
+                valeurColonne[colonn]= grille[colonn][j];
+                colonn++;
             }
         }
         return true;
@@ -152,21 +152,57 @@ public class Main {
         return true ;
     }
 
+    public static boolean Resolve1 (int grille [][]) {
+        int i = 0 ;
+        int j = 0 ;
+        int I = i ;
+        int J = j ;
+        int possiblité [] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            while (i < 9 && j < 9) {
+                while (i < 9) {
+                    if (grille[i][j] == 0) {
+                        int n = 0 ;
+                        int N = n ;
+                        grille[i][j] = possiblité[0];
+                            if (!GoodBoard(grille)) {
+                                grille[i][j] = possiblité[n];
+                                n = n + 1;
+                            }
+                    }
+                    else {
+
+                    }
+                    i++ ;
+                }
+                j++ ;
+                i = I ;
+            }
+
+            PrintGrille(grille);
+            return true ;
+        }
+
+
+
 
 
 
     public static void main(String[] args) {
 
-	PrintGrille(Boards.boardEasy);
-	boolean GoodLine=GoodLine(Boards.boardEasy,0);
-	System.out.println("la est ligne est-elle bonne ? :" +GoodLine);
-	boolean GoodColonne=GoodColonne(Boards.boardEasy,0);
-	System.out.println("la est colonne est-elle bonne ? :" +GoodColonne);
-	boolean GoodSection = GoodSection(Boards.boardEasy, 3, 3);
-	System.out.println("la sous-section est-elle bonne ? :" + GoodSection);
-    boolean GoodBoards = GoodBoard(Boards.boardEasy);
-    System.out.println("La grille est-elle bonne ? :" +GoodBoards);
+//	PrintGrille(Boards.boardEasy);
+//	boolean GoodLine=GoodLine(Boards.boardEasy,0);
+//	System.out.println("la ligne est-elle bonne ? :" +GoodLine);
+//	boolean GoodColonne=GoodColonne(Boards.boardEasy,0);
+//	System.out.println("la colonne est-elle bonne ? :" +GoodColonne);
+//	boolean GoodSection = GoodSection(Boards.boardEasy, 3, 3);
+//	System.out.println("la sous-section est-elle bonne ? :" + GoodSection);
+//    boolean GoodBoards = GoodBoard(Boards.boardEasy);
+//    System.out.println("La grille est-elle bonne ? :" +GoodBoards);
 
+//    int Possible[] = {1, 2, 3, 4, 5, 6, 7, 8, 9} ;
+//    Resolve(Boards.boardEasy, Possible) ;
+
+    Resolve1(Boards.boardEasy);
 
 
     }
