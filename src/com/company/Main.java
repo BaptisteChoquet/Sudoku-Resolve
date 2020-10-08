@@ -33,7 +33,7 @@ public class Main {
     public static boolean GoodLine(int grille[][],int i){
 
         int line=0;
-        int [] valeur= new int[9];
+        int [] valeurLine= new int[9];
         while (line<9 ){
             for (int m=0; m<=8;m++) {
                 if (grille[i][line] == 0) {
@@ -41,12 +41,12 @@ public class Main {
                 }
                 else {
                     for (int n = 0; n <= 8; n++) {
-                        if (grille[i][line] == valeur[n]) {
+                        if (grille[i][line] == valeurLine[n]) {
                             return false;
                         }
                     }
                 }
-                valeur[line]= grille[i][line];
+                valeurLine[line]= grille[i][line];
                 line++;
             }
         }
@@ -63,7 +63,7 @@ public class Main {
     public static boolean GoodColonne(int grille[][],int j){
 
         int colonne=0;
-        int [] valeur= new int[9];
+        int [] valeurColonne= new int[9];
         while (colonne < 9){
             for (int m=0 ; m<=8 ; m++) {
                 if (grille[colonne][j] == 0) {
@@ -71,12 +71,12 @@ public class Main {
                 }
                 else {
                     for (int n = 0; n <= 8; n++) {
-                        if (grille[colonne][j] == valeur[n]) {
+                        if (grille[colonne][j] == valeurColonne[n]) {
                             return false;
                         }
                     }
                 }
-                valeur[colonne]= grille[colonne][j];
+                valeurColonne[colonne]= grille[colonne][j];
                 colonne++;
             }
         }
@@ -84,7 +84,7 @@ public class Main {
     }
 
     public static boolean GoodSection(int grille[][], int i, int j ) {
-        int [] valeur= new int[9];
+        int [] valeurSection= new int[9];
         int I = i;
         int J = j;
         while (i < I + 3){
@@ -94,13 +94,13 @@ public class Main {
 
                     } else {
                         for (int n = 0; n < 9; n++) {
-                            if (grille[i][j] == valeur[n]) {
+                            if (grille[i][j] == valeurSection[n]) {
                                 return false;
                             }
                         }
                     }
                     int index = (i-I)*3 + j-J;
-                    valeur[index] = grille[i][j];
+                    valeurSection[index] = grille[i][j];
                     j++;
                 }
                 i++;
@@ -111,6 +111,50 @@ public class Main {
         return true ;
     }
 
+    public static boolean GoodBoard (int grille[][]) {
+        int i = 0 ;
+        int j = 0 ;
+        int I = i ;
+        int J = i ;
+
+        while (i < 9 && j < 9) {
+            while (i < 9) {
+                boolean GoodLines = GoodLine(grille, i);
+                GoodLine(grille, i);
+                if (!GoodLines) {
+                    return false;
+                }
+                i++;
+            }
+            while (j < 9) {
+                boolean GoodColonnes = GoodColonne(grille, j);
+                GoodColonne(grille, j);
+                if (!GoodColonnes) {
+                    return false ;
+                }
+                j++;
+            }
+            i = I ;
+            j = J ;
+            while (i < 9) {
+                while (j < 9) {
+                    boolean GoodSections = GoodSection(grille , i , j) ;
+                    GoodSection(grille , i , j ) ;
+                    if (!GoodSections) {
+                        return false;
+                    }
+                j = j + 3 ;
+                }
+            i = i + 3 ;
+            j = J ;
+            }
+        }
+        return true ;
+    }
+
+
+
+
     public static void main(String[] args) {
 
 	PrintGrille(Boards.boardEasy);
@@ -120,7 +164,8 @@ public class Main {
 	System.out.println("la est colonne est-elle bonne ? :" +GoodColonne);
 	boolean GoodSection = GoodSection(Boards.boardEasy, 3, 3);
 	System.out.println("la sous-section est-elle bonne ? :" + GoodSection);
-
+    boolean GoodBoards = GoodBoard(Boards.boardEasy);
+    System.out.println("La grille est-elle bonne ? :" +GoodBoards);
 
 
 
