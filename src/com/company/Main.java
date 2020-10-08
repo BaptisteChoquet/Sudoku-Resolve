@@ -152,6 +152,22 @@ public class Main {
         return true ;
     }
 
+    public static int[] remove(int[] symbols, int c)
+    {
+        for (int i = 0; i < symbols.length; i++)
+        {
+            if (symbols[i] == c)
+            {
+                int[] copy = new int[symbols.length-1];
+                System.arraycopy(symbols, 0, copy, 0, i);
+                System.arraycopy(symbols, i+1, copy, i, symbols.length-i-1);
+                return copy ;
+            }
+        }
+        return symbols;
+    }
+
+
     public static void Resolve(int grille [][], int Results[]) {
         int line=0;
         int colonn=0;
@@ -170,6 +186,7 @@ public class Main {
                                 for (int r = 0 ; r < R.length ; r++) {
                                     grille[colonn][line] = R[r] ;
                                     if (!GoodBoard(grille)) {
+                                        R = remove(R, 0);
                                     }
                                     else {
                                         break ;
@@ -182,14 +199,14 @@ public class Main {
                         for (int r = 0 ; r < R.length ; r++) {
                             grille[colonn][line] = R[r] ;
                             if (!GoodBoard(grille)) {
-                                if (grille[colonn][line]==8) {
-                                    grille[colonn][line] = 0 ;
-                                }
+                                R[r] = 0 ;
+                                R = remove(R, 0) ;
+
                             }
                             else {
-                                PrintGrille(grille);
-                                System.out.println("______________________");
-                                break ;
+                                if (R.length == 1) {
+                                    break ;
+                                }
                             }
                         }
                     }
@@ -213,11 +230,12 @@ public class Main {
 //	System.out.println("la est colonne est-elle bonne ? :" +GoodColonne);
 //	boolean GoodSection = GoodSection(Boards.boardEasy, 3, 3);
 //	System.out.println("la sous-section est-elle bonne ? :" + GoodSection);
-    boolean GoodBoards = GoodBoard(Boards.boardEasy);
+//    boolean GoodBoards = GoodBoard(Boards.boardEasy);
     //    System.out.println("La grille est-elle bonne ? :" +GoodBoards);
     int Possible[] = {1, 2, 3, 4, 5, 6, 7, 8, 9} ;
     Resolve(Boards.boardEasy, Possible) ;
-
+    int []Test = {1, 2, 3, 4, 5} ;
+    System.out.println(remove(Test, 3));
 
 
     }
