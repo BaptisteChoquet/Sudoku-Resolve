@@ -26,28 +26,28 @@ public class Main {
     /**
      * Vérifie si une ligne suis la règle du Sudoku.
      * @param grille
-     * @param line
+     * @param i
      * @return True si la ligne est correct sinon revoie False
      */
 
-    public static boolean GoodLine(int grille[][],int line){
+    public static boolean GoodLine(int grille[][],int i){
 
-        int colonn=0;
+        int line=0;
         int [] valeur= new int[9];
-        while (colonn<9 ){
-            for (int i=0; i<=8;i++) {
-                if (grille[line][colonn] == 0) {
+        while (line<9 ){
+            for (int m=0; m<=8;m++) {
+                if (grille[i][line] == 0) {
 
                 }
                 else {
                     for (int n = 0; n <= 8; n++) {
-                        if (grille[line][colonn] == valeur[n]) {
+                        if (grille[i][line] == valeur[n]) {
                             return false;
                         }
                     }
                 }
-                valeur[colonn]= grille[line][colonn];
-                colonn++;
+                valeur[line]= grille[i][line];
+                line++;
             }
         }
         return true;
@@ -57,39 +57,69 @@ public class Main {
      *
      * Vérifie si une colonne suis la règle du Sudoku.
      * @param grille
-     * @param colonn
+     * @param j
      * @return True si la colonne est correct sinon revoie False
      */
-    public static boolean GoodColonn(int grille[][],int colonn){
+    public static boolean GoodColonne(int grille[][],int j){
 
-        int line=0;
+        int colonne=0;
         int [] valeur= new int[9];
-        while (line<9 ){
-            for (int i=0; i<=8;i++) {
-                if (grille[line][colonn] == 0) {
+        while (colonne < 9){
+            for (int m=0 ; m<=8 ; m++) {
+                if (grille[colonne][j] == 0) {
 
                 }
                 else {
                     for (int n = 0; n <= 8; n++) {
-                        if (grille[line][colonn] == valeur[n]) {
+                        if (grille[colonne][j] == valeur[n]) {
                             return false;
                         }
                     }
                 }
-                valeur[line]= grille[line][colonn];
-                line++;
+                valeur[colonne]= grille[colonne][j];
+                colonne++;
             }
         }
         return true;
+    }
+
+    public static boolean GoodSection(int grille[][], int i, int j ) {
+        int [] valeur= new int[9];
+        int I = i;
+        int J = j;
+        while (i < I + 3){
+            while (j < J + 3) {
+                for (int m = 0; m < 3; m++) {
+                    if (grille[i][j] == 0) {
+
+                    } else {
+                        for (int n = 0; n < 9; n++) {
+                            if (grille[i][j] == valeur[n]) {
+                                return false;
+                            }
+                        }
+                    }
+                    int index = (i-I)*3 + j-J;
+                    valeur[index] = grille[i][j];
+                    j++;
+                }
+                i++;
+            }
+
+            j = J ;
+        }
+        return true ;
     }
 
     public static void main(String[] args) {
 
 	PrintGrille(Boards.boardEasy);
 	boolean GoodLine=GoodLine(Boards.boardEasy,0);
-	System.out.println(GoodLine);
-	boolean GoodColonn=GoodColonn(Boards.boardEasy,0);
-	System.out.println(GoodColonn);
+	System.out.println("la est ligne est-elle bonne ? :" +GoodLine);
+	boolean GoodColonne=GoodColonne(Boards.boardEasy,0);
+	System.out.println("la est colonne est-elle bonne ? :" +GoodColonne);
+	boolean GoodSection = GoodSection(Boards.boardEasy, 3, 3);
+	System.out.println("la sous-section est-elle bonne ? :" + GoodSection);
 
 
 
