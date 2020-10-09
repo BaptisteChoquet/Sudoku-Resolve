@@ -3,8 +3,8 @@ package com.company;
 public class Main {
 
     /**
-     * Affiche la grille placer en paramètre.
-     * @param grille
+     * Displays the board in parameter
+     * @param grille The original board
      */
     public static void PrintGrille(int grille[][]){
         int line=0;
@@ -25,10 +25,10 @@ public class Main {
     }
 
     /**
-     * Vérifie si une ligne suis la règle du Sudoku.
-     * @param grille
-     * @param i
-     * @return True si la ligne est correct sinon revoie False
+     * Verifies if a line is valid
+     * @param grille The original board
+     * @param i Index of the line
+     * @return True if the line is valid, if not returns False
      */
 
     public static boolean GoodLine(int grille[][],int i){
@@ -55,11 +55,10 @@ public class Main {
     }
 
     /**
-     *
-     * Vérifie si une colonne suis la règle du Sudoku.
-     * @param grille
-     * @param j
-     * @return True si la colonne est correct sinon revoie False
+     * Verifies if a column is valid
+     * @param grille The original board
+     * @param j Index of the column
+     * @return True if the column is valid, if not returns False
      */
     public static boolean GoodColonne(int grille[][],int j){
 
@@ -84,6 +83,13 @@ public class Main {
         return true;
     }
 
+    /**
+     * Verifies if a sub-section is valid
+      * @param grille The original board
+     * @param i Index of the beggining line
+     * @param j Index of the beggining column
+     * @return True if the sub-szection is valid, if not returns False
+     */
     public static boolean GoodSection(int grille[][], int i, int j ) {
         int [] valeurSection= new int[9];
         int I = i;
@@ -112,6 +118,11 @@ public class Main {
         return true ;
     }
 
+    /**
+     * Verifies if the whole board is valid
+     * @param grille The original board
+     * @return True if the whole board is valid, if not returns False
+     */
     public static boolean GoodBoard (int grille[][]) {
         int i = 0 ;
         int j = 0 ;
@@ -153,52 +164,12 @@ public class Main {
         return true ;
     }
 
-//    public static boolean Resolve1 (int grille [][]) {
-//        int i = 0;
-//        int j = 0;
-//        int I = i;
-//        int J = j;
-//        int possiblité[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-//        while (GoodBoard(grille)) {
-//            while (i < 9 && j < 9) {
-//                while (j < 9) {
-//                    if (grille[i][j] == 0) {
-//                        int n = 0;
-//                        int N = n;
-//                        grille[i][j] = possiblité[0];
-//                        while (!GoodBoard(grille)) {
-//                            grille[i][j] = possiblité[n];
-//                            n = n + 1;
-//                        }
-//                    }
-//                    else {
-//
-//                    }
-//                    j++;
-//                }
-//                while (i < 9) {
-//                    if (grille[i][j] == 0) {
-//                        int n = 0;
-//                        int N = n;
-//                        grille[i][j] = possiblité[0];
-//                        while (!GoodBoard(grille)) {
-//                            grille[i][j] = possiblité[n];
-//                            n = n + 1;
-//                        }
-//                    }
-//                    else {
-//
-//                    }
-//                    i++;
-//                }
-//            }
-//
-//        }
-//        PrintGrille(grille);
-//        return true;
-//    }
-
-    public static boolean Resolve2 (int grille [][]) {
+    /**
+     * Fills every empty slots with valid values
+     * @param grille The original board
+     * @return True if a possibility is valid, False if it is invalid
+     */
+    public static boolean Resolve (int grille [][]) {
         int i ;
         int j ;
         for (j = 0 ; j < 9 ; j++) {
@@ -207,7 +178,7 @@ public class Main {
                     for (int possibilité = 1 ; possibilité < 10 ; possibilité++) {
                         grille[i][j] = possibilité;
                         if (GoodBoard(grille)) {
-                            if (Resolve2(grille)) {
+                            if (Resolve(grille)) {
                                 return true;
                             }
                         }
@@ -241,11 +212,7 @@ public class Main {
 //    boolean GoodBoards = GoodBoard(Boards.boardEasy);
 //    System.out.println("La grille est-elle bonne ? :" +GoodBoards);
 
-//    int Possible[] = {1, 2, 3, 4, 5, 6, 7, 8, 9} ;
-//    Resolve(Boards.boardEasy, Possible) ;
-
-//    Resolve1(Boards.boardEasy);
-    Resolve2(Boards.boardEasy);
+    Resolve(Boards.boardEasy);
 
 
     }
