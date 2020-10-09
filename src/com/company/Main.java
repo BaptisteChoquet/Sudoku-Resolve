@@ -1,4 +1,5 @@
 package com.company;
+
 public class Main {
 
     /**
@@ -62,22 +63,22 @@ public class Main {
      */
     public static boolean GoodColonne(int grille[][],int j){
 
-        int colonn=0;
+        int colonne=0;
         int [] valeurColonne= new int[9];
-        while (colonn < 9){
+        while (colonne < 9){
             for (int m=0 ; m<=8 ; m++) {
-                if (grille[colonn][j] == 0) {
+                if (grille[colonne][j] == 0) {
 
                 }
                 else {
                     for (int n = 0; n <= 8; n++) {
-                        if (grille[colonn][j] == valeurColonne[n]) {
+                        if (grille[colonne][j] == valeurColonne[n]) {
                             return false;
                         }
                     }
                 }
-                valeurColonne[colonn]= grille[colonn][j];
-                colonn++;
+                valeurColonne[colonne]= grille[colonne][j];
+                colonne++;
             }
         }
         return true;
@@ -152,35 +153,81 @@ public class Main {
         return true ;
     }
 
-    public static boolean Resolve1 (int grille [][]) {
+//    public static boolean Resolve1 (int grille [][]) {
+//        int i = 0;
+//        int j = 0;
+//        int I = i;
+//        int J = j;
+//        int possiblité[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+//        while (GoodBoard(grille)) {
+//            while (i < 9 && j < 9) {
+//                while (j < 9) {
+//                    if (grille[i][j] == 0) {
+//                        int n = 0;
+//                        int N = n;
+//                        grille[i][j] = possiblité[0];
+//                        while (!GoodBoard(grille)) {
+//                            grille[i][j] = possiblité[n];
+//                            n = n + 1;
+//                        }
+//                    }
+//                    else {
+//
+//                    }
+//                    j++;
+//                }
+//                while (i < 9) {
+//                    if (grille[i][j] == 0) {
+//                        int n = 0;
+//                        int N = n;
+//                        grille[i][j] = possiblité[0];
+//                        while (!GoodBoard(grille)) {
+//                            grille[i][j] = possiblité[n];
+//                            n = n + 1;
+//                        }
+//                    }
+//                    else {
+//
+//                    }
+//                    i++;
+//                }
+//            }
+//
+//        }
+//        PrintGrille(grille);
+//        return true;
+//    }
+
+    public static boolean Resolve2 (int grille [][]) {
         int i = 0 ;
         int j = 0 ;
-        int I = i ;
-        int J = j ;
-        int possiblité [] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-            while (i < 9 && j < 9) {
-                while (i < 9) {
-                    if (grille[i][j] == 0) {
-                        int n = 0 ;
-                        int N = n ;
-                        grille[i][j] = possiblité[0];
-                            if (!GoodBoard(grille)) {
-                                grille[i][j] = possiblité[n];
-                                n = n + 1;
+        int possibilité []= {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        for (j = 0 ; j < 9 ; j++) {
+            for (i = 0 ; i < 9 ; i++){
+                if  (grille[i][j] == 0) {
+                    int n = 0;
+                    int N = n;
+                    while (n < 9) {
+                        grille[i][j] = possibilité[n];
+
+                        if (!GoodBoard(grille)) {
+                            grille[i][j] = 0;
+                            n++;
+                        } else {
+                            if (Resolve2(grille)) {
+                                return Resolve2(grille);
                             }
+                        }
                     }
-                    else {
-
-                    }
-                    i++ ;
                 }
-                j++ ;
-                i = I ;
             }
-
-            PrintGrille(grille);
-            return true ;
         }
+        PrintGrille(grille);
+        System.out.println("__________________________");
+        return false ;
+    }
+
+
 
 
 
@@ -202,7 +249,8 @@ public class Main {
 //    int Possible[] = {1, 2, 3, 4, 5, 6, 7, 8, 9} ;
 //    Resolve(Boards.boardEasy, Possible) ;
 
-    Resolve1(Boards.boardEasy);
+//    Resolve1(Boards.boardEasy);
+    Resolve2(Boards.boardEasy);
 
 
     }
