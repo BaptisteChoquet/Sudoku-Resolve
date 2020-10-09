@@ -164,11 +164,14 @@ public class Main {
         return true ;
     }
 
+<<<<<<< HEAD
     /**
      * Fills every empty slots with valid values
      * @param grille The original board
      * @return True if a possibility is valid, False if it is invalid
      */
+=======
+>>>>>>> 5ef2530eb98f918bf94ea9aea11a73e1cf2238b3
     public static boolean Resolve (int grille [][]) {
         int i ;
         int j ;
@@ -176,14 +179,20 @@ public class Main {
             for (i = 0 ; i < 9 ; i++){
                 if  (grille[i][j] == 0) {
                     for (int possibilité = 1 ; possibilité < 10 ; possibilité++) {
+                        CPU++;
                         grille[i][j] = possibilité;
                         if (GoodBoard(grille)) {
                             if (Resolve(grille)) {
+<<<<<<< HEAD
+=======
+                                CPUgrille++;
+>>>>>>> 5ef2530eb98f918bf94ea9aea11a73e1cf2238b3
                                 return true;
                             }
                         }
                     }
                     grille[i][j] = 0 ;
+                    CPUgrille++;
                     return false ;
                 }
             }
@@ -192,16 +201,12 @@ public class Main {
         System.out.println("_________________");
         return false ;
     }
-
-
-
-
-
-
-
+    static int CPU;
+    static int CPUgrille;
 
     public static void main(String[] args) {
 
+<<<<<<< HEAD
 //	PrintGrille(Boards.boardEasy);
 //	boolean GoodLine=GoodLine(Boards.boardEasy,0);
 //	System.out.println("la ligne est-elle bonne ? :" +GoodLine);
@@ -213,7 +218,16 @@ public class Main {
 //    System.out.println("La grille est-elle bonne ? :" +GoodBoards);
 
     Resolve(Boards.boardEasy);
+=======
+    long timerStart = System.currentTimeMillis() ;
+    PrintGrille (Boards.boardGodLike);
+    System.out.println("_________________");
+>>>>>>> 5ef2530eb98f918bf94ea9aea11a73e1cf2238b3
 
+    Resolve(Boards.boardGodLike);
+    long timerEnd = System.currentTimeMillis() ;
+    long timer = timerEnd - timerStart ;
+    System.out.println("Le sudoku c'est résolu en " + timer + "ms");
 
     }
 }
