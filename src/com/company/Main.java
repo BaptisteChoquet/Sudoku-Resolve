@@ -153,52 +153,7 @@ public class Main {
         return true ;
     }
 
-//    public static boolean Resolve1 (int grille [][]) {
-//        int i = 0;
-//        int j = 0;
-//        int I = i;
-//        int J = j;
-//        int possiblité[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-//        while (GoodBoard(grille)) {
-//            while (i < 9 && j < 9) {
-//                while (j < 9) {
-//                    if (grille[i][j] == 0) {
-//                        int n = 0;
-//                        int N = n;
-//                        grille[i][j] = possiblité[0];
-//                        while (!GoodBoard(grille)) {
-//                            grille[i][j] = possiblité[n];
-//                            n = n + 1;
-//                        }
-//                    }
-//                    else {
-//
-//                    }
-//                    j++;
-//                }
-//                while (i < 9) {
-//                    if (grille[i][j] == 0) {
-//                        int n = 0;
-//                        int N = n;
-//                        grille[i][j] = possiblité[0];
-//                        while (!GoodBoard(grille)) {
-//                            grille[i][j] = possiblité[n];
-//                            n = n + 1;
-//                        }
-//                    }
-//                    else {
-//
-//                    }
-//                    i++;
-//                }
-//            }
-//
-//        }
-//        PrintGrille(grille);
-//        return true;
-//    }
-
-    public static boolean Resolve2 (int grille [][]) {
+    public static boolean Resolve (int grille [][]) {
         int i ;
         int j ;
         for (j = 0 ; j < 9 ; j++) {
@@ -207,7 +162,7 @@ public class Main {
                     for (int possibilité = 1 ; possibilité < 10 ; possibilité++) {
                         grille[i][j] = possibilité;
                         if (GoodBoard(grille)) {
-                            if (Resolve2(grille)) {
+                            if (Resolve(grille)) {
                                 return true;
                             }
                         }
@@ -222,31 +177,16 @@ public class Main {
         return false ;
     }
 
-
-
-
-
-
-
-
     public static void main(String[] args) {
 
-//	PrintGrille(Boards.boardEasy);
-//	boolean GoodLine=GoodLine(Boards.boardEasy,0);
-//	System.out.println("la ligne est-elle bonne ? :" +GoodLine);
-//	boolean GoodColonne=GoodColonne(Boards.boardEasy,0);
-//	System.out.println("la colonne est-elle bonne ? :" +GoodColonne);
-//	boolean GoodSection = GoodSection(Boards.boardEasy, 3, 3);
-//	System.out.println("la sous-section est-elle bonne ? :" + GoodSection);
-//    boolean GoodBoards = GoodBoard(Boards.boardEasy);
-//    System.out.println("La grille est-elle bonne ? :" +GoodBoards);
+    long timerStart = System.currentTimeMillis() ;
+    PrintGrille (Boards.boardGodLike);
+    System.out.println("_________________");
 
-//    int Possible[] = {1, 2, 3, 4, 5, 6, 7, 8, 9} ;
-//    Resolve(Boards.boardEasy, Possible) ;
-
-//    Resolve1(Boards.boardEasy);
-    Resolve2(Boards.boardEasy);
-
+    Resolve(Boards.boardGodLike);
+    long timerEnd = System.currentTimeMillis() ;
+    long timer = timerEnd - timerStart ;
+    System.out.println("Le sudoku c'est résolu en " + timer + "ms");
 
     }
 }
