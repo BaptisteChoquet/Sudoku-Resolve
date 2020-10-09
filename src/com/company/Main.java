@@ -199,31 +199,26 @@ public class Main {
 //    }
 
     public static boolean Resolve2 (int grille [][]) {
-        int i = 0 ;
-        int j = 0 ;
-        int possibilité []= {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int i ;
+        int j ;
         for (j = 0 ; j < 9 ; j++) {
             for (i = 0 ; i < 9 ; i++){
                 if  (grille[i][j] == 0) {
-                    int n = 0;
-                    int N = n;
-                    while (n < 9) {
-                        grille[i][j] = possibilité[n];
-
-                        if (!GoodBoard(grille)) {
-                            grille[i][j] = 0;
-                            n++;
-                        } else {
+                    for (int possibilité = 1 ; possibilité < 10 ; possibilité++) {
+                        grille[i][j] = possibilité;
+                        if (GoodBoard(grille)) {
                             if (Resolve2(grille)) {
-                                return Resolve2(grille);
+                                return true;
                             }
                         }
                     }
+                    grille[i][j] = 0 ;
+                    return false ;
                 }
             }
         }
         PrintGrille(grille);
-        System.out.println("__________________________");
+        System.out.println("_________________");
         return false ;
     }
 
