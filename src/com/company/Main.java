@@ -160,14 +160,17 @@ public class Main {
             for (i = 0 ; i < 9 ; i++){
                 if  (grille[i][j] == 0) {
                     for (int possibilité = 1 ; possibilité < 10 ; possibilité++) {
+                        CPU++;
                         grille[i][j] = possibilité;
                         if (GoodBoard(grille)) {
                             if (Resolve(grille)) {
+                                CPUgrille++;
                                 return true;
                             }
                         }
                     }
                     grille[i][j] = 0 ;
+                    CPUgrille++;
                     return false ;
                 }
             }
@@ -176,6 +179,8 @@ public class Main {
         System.out.println("_________________");
         return false ;
     }
+    static int CPU;
+    static int CPUgrille;
 
     public static void main(String[] args) {
 
